@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Short Circuit - maze game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Short Circuit</h1>
+    <p class="css-only">Guide your cursor from the green input pad to the lamp. Touch a wall and the circuit shorts.</p>
+    <p class="js-only">Move the blue signal from the green input pad to the lamp with the arrow keys or W, A, S, D. Walls block you and count as a bump. Press R to restart.</p>
+  </header>
+
+  <main>
+    <p class="status js-only" aria-live="polite">
+      <span>Moves: <strong id="moves">0</strong></span>
+      <span>Bumps: <strong id="bumps">0</strong></span>
+    </p>
+
+    <!-- The maze is a 15 x 11 grid. Wall cells react to :hover. The result
+         screens are the last two children so the CSS sibling selector (~) can show them. -->
+    <div class="maze" aria-label="Maze game, mouse required">
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell start">&#9654;</div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell finish">&#128161;</div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="overlay lose">
+        <h2>Short circuit!</h2>
+        <p>You touched a wall.</p>
+        <a class="btn" href="index.html">Try again</a>
+      </div>
+      <div class="overlay win">
+        <h2>Power on!</h2>
+        <p id="result">The lamp is lit. You made it through.</p>
+        <a class="btn" href="index.html">Play again</a>
+      </div>
+    </div>
+    <p class="no-hover">This game needs a mouse or trackpad. Open it on a laptop or desktop.</p>
+
+    <!-- On-screen arrows for touch screens (used by script.js) -->
+    <div class="pad js-only" aria-label="On-screen controls">
+      <button type="button" data-dir="up" aria-label="Move up">&#9650;</button>
+      <button type="button" data-dir="left" aria-label="Move left">&#9664;</button>
+      <button type="button" data-dir="down" aria-label="Move down">&#9660;</button>
+      <button type="button" data-dir="right" aria-label="Move right">&#9654;</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Built with HTML, CSS and a little JavaScript for keyboard controls.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
