@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Short Circuit - HTML and CSS maze game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Short Circuit</h1>
+    <p>Guide your cursor from the green input pad to the lamp. Touch a wall and the circuit shorts.</p>
+  </header>
+
+  <main>
+    <!-- The maze is a 15 x 11 grid. Wall cells react to :hover. The result
+         screens are the last two children so the CSS sibling selector (~) can show them. -->
+    <div class="maze" aria-label="Maze game, mouse required">
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell start">&#9654;</div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell wall"></div>
+      <div class="cell path"></div>
+      <div class="cell path"></div>
+      <div class="cell finish">&#128161;</div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="overlay lose">
+        <h2>Short circuit!</h2>
+        <p>You touched a wall.</p>
+        <a class="btn" href="index.html">Try again</a>
+      </div>
+      <div class="overlay win">
+        <h2>Power on!</h2>
+        <p>The lamp is lit. You made it through.</p>
+        <a class="btn" href="index.html">Play again</a>
+      </div>
+    </div>
+    <p class="no-hover">This game needs a mouse or trackpad. Open it on a laptop or desktop.</p>
+  </main>
+
+  <footer>
+    <p>Built with only HTML and CSS. No JavaScript.</p>
+  </footer>
+</body>
+</html>

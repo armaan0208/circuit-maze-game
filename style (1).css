@@ -1,0 +1,125 @@
+/* Short Circuit - a maze game built with only HTML and CSS */
+
+:root {
+  --page: #0b2119;
+  --wall: #1f5f49;
+  --trace: #e4eedf;
+  --input: #7bd88f;
+  --short: #e5484d;
+  --lamp: #ffd23f;
+  --text: #e4eedf;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 16px 32px;
+  background: var(--page);
+  color: var(--text);
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  line-height: 1.5;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 4px;
+  font-size: clamp(2rem, 6vw, 3rem);
+  letter-spacing: 0.02em;
+}
+
+header p {
+  max-width: 46ch;
+  margin: 0 auto 24px;
+}
+
+/* ---- Maze grid ---- */
+.maze {
+  --cell: min(40px, calc((100vw - 32px) / 15));
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(15, var(--cell));
+  grid-auto-rows: var(--cell);
+  width: max-content;
+  margin: 0 auto;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--cell) * 0.5);
+}
+
+.path   { background: var(--trace); }
+.start  { background: var(--input); color: var(--page); }
+.wall   { background: var(--wall); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
+.wall:hover { background: var(--short); }
+
+.finish {
+  background: var(--lamp);
+  animation: glow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 0 0 rgba(255, 210, 63, 0); }
+  to   { box-shadow: inset 0 0 14px 4px rgba(255, 255, 255, 0.7); }
+}
+
+/* ---- Result screens ----
+   Hidden by default. Hovering a wall (or the lamp) shows one of them.
+   The long transition delay keeps it visible after the mouse moves away. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+  padding: 16px;
+  background: rgba(11, 33, 25, 0.95);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 86400s, opacity 0.25s 86400s;
+}
+
+.overlay h2 { margin: 0; font-size: clamp(1.6rem, 6vw, 2.4rem); }
+.overlay p  { margin: 0 0 12px; }
+.lose h2 { color: var(--short); }
+.win h2  { color: var(--lamp); }
+
+.wall:hover   ~ .lose,
+.finish:hover ~ .win {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.btn {
+  padding: 10px 22px;
+  border-radius: 6px;
+  background: var(--trace);
+  color: var(--page);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn:hover { background: var(--lamp); }
+.btn:focus-visible { outline: 3px solid var(--lamp); outline-offset: 3px; }
+
+/* ---- Notices ---- */
+.no-hover { display: none; margin-top: 16px; color: var(--lamp); }
+
+@media (hover: none) {
+  .no-hover { display: block; }
+}
+
+footer { margin-top: 24px; font-size: 0.9rem; opacity: 0.7; }
+
+@media (prefers-reduced-motion: reduce) {
+  .finish { animation: none; }
+  .overlay { transition-duration: 0s; }
+}
